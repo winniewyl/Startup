@@ -1,0 +1,324 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.wrapper {
+	width: 1170px;
+	margin: auto;
+}
+header {
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(background_image.jpg);
+	height: 85vh;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+}
+.nav-area {
+	float: right;
+	list-style: none;
+	margin-top: 30px;
+}
+.nav-area li {
+	display: inline-block;
+}
+.nav-area li a {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 20px;
+	font-family: poppins;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+.nav-area li a:hover {
+	background: #fff;
+	color: #333;
+}
+.logo {
+	float: left;
+}
+
+.webname h2 {
+	float: left;
+	color: #00fecb;
+	font-size: 60px;
+}
+
+.logo img {
+	width: 70%;
+	padding: 15px 0;
+}
+.welcome-text {
+	position: absolute;
+	width: 600px;
+	height: 300px;
+	margin: 20% 30%;
+	text-align: center;
+}
+.welcome-text h1 {
+	text-align: center;
+	color: #fff;
+	font-size: 50px;
+}
+.welcome-text h1 span {
+	color: #00fecb;
+}
+
+.welcome-text a:hover {
+	background: #fff;
+	color: #333;
+}
+
+.wel_description h5 {
+	padding: 20px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	font-size: 20px;
+}
+/*resposive*/
+
+@media (max-width:600px) {
+	.wrapper {
+		width: 100%;
+	}
+	.logo {
+		float: none;
+		width: 50%;
+		text-align: center;
+		margin: auto;
+	}
+	img {
+		width: ;
+	}
+	.nav-area {
+		float: none;
+		margin-top: 0;
+	}
+	.nav-area li a {
+		padding: 5px;
+		font-size: 11px;
+	}
+	.nav-area {
+		text-align: center;
+	}
+	.welcome-text {
+		width: 100%;
+		height: auto;
+		margin: 30% 0;
+	}
+	.welcome-text h1 {
+		font-size: 30px;
+	}
+}
+
+
+.wrapper_3 h1{
+  font-family: sans-serif;
+  font-size: 52px;
+  margin-top: 20px ;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.goals{
+  display: flex;
+  justify-content: center;
+  width: auto;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.goals .description{
+  background: #ccc;
+  margin: 5px;
+  margin-bottom: 50px;
+  width: 300px;
+  padding: 20px;
+  line-height: 20px;
+  color: #8e8b8b;  
+  position: relative;
+}
+
+.goals .description h3{
+	line-height: 20px;
+	padding-bottom: 30px;
+  color: #81c644;
+  font-size: 25px;
+  margin-top: 50px;
+}
+
+.goals .description p.role{
+  color: #fff;
+  margin: 12px 0;
+  font-size: 12px;
+}
+
+.description p {
+	color: #000;
+	font-size: 20px;
+}
+
+
+
+
+
+
+
+footer{
+	width: 100%;
+	height: 120px;
+	position: relative;
+	bottom: 0;
+	z-index: -1;
+	background-color: #262626;
+}
+
+.footer-wrapper{
+	width: 1100px;
+	margin:  0 auto;
+}
+
+.single-footer{
+	width: 33%;
+	float: left;
+	text-align: left;
+	color: #fff;
+}
+
+.single-footer ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.single-footer ul a{
+	text-decoration: none;
+	color: #fff;
+	font-size: 12px;
+	font-family: 'Poppins', sans-serif;
+}
+
+.single-footer li a:hover {
+	background: #fff;
+	color: #333;
+}
+
+.single-footer p{
+	width: 70%;
+}
+
+
+
+
+
+
+
+
+
+.wrapper_2 {
+  margin: 0px auto 0;
+  width: 50%;
+  max-width: 680px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* content */
+.content {
+  text-align: center;
+  color: #fff;
+	text-decoration: none;
+	/*padding: 5px 20px;*/
+	padding: 120px 20px 5px 20px;
+	font-family: poppins;
+	font-size: 25px;
+	text-transform: uppercase;
+}
+
+
+
+/* form */
+.form {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.top-form,
+.middle-form,
+.bottom-form {
+  width: 100%;
+  min-height: 65px;
+  margin: 10px 0;
+}
+
+.form input[type="text"],
+.form textarea {
+  border: 2px solid #fff;
+  padding: 10px 5px;
+  outline: none;
+  border-radius: 2px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #4ca1af;
+  outline: none;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.0125),
+    0 0 8px rgba(76, 161, 175, 0.5);
+}
+
+.form .label {
+  color:#fff ;	
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+/* top-contact */
+.top-form .inner-form {
+  width: 29.9%;
+  float: left;
+  margin-right: 5%;
+}
+
+.top-form .inner-form:last-child {
+  margin-right: 0;
+}
+
+
+/* middle-form */
+.middle-form {
+  clear: both;
+}
+
+/* bottom-form */
+.bottom-form textarea {
+  height: 80px;
+}
+
+.btn {
+  /*background: #00fecb;*/
+  background: #4ca1af;
+  width: 200px;
+  padding: 10px 0;
+  border-radius: 2px;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
