@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Joe's Hotdogs</title>
+	<style style="text/css">
+		div {
+  		column-count: 3;
+		}
+		
+		#table {
+  			display: table;
+		}
+
+	</style>
+
+	<script language="javascript">
+		//create arrays to store quantities and unit prices of the food items
+		foods = ["hotdogs", "French fries", "soda"];
+		unit_price = [3.75, 2.00, 1.50];
+		foods_num = [];
+		food_price = [];
+
+		//ask user for quantities of each food item
+		function getQuantity()
+		{
+			for (i = 0; i < 3; i++) {
+				foods_num[i] = prompt("Please enter the quantity of " + foods[i] + ": ", "");
+			}
+
+		}
+
+		//calculate the subtotal price before any discount and tax
+		function subTotal()
+		{	
+			curr_price = 0;
+			for (i = 0; i < 3; i++) {
+				curr_price += foods_num[i] * unit_price[i];
+			}
+			
+			return curr_price;
+			 
+		}
+
+		//see if discount is applicable
+		function discount(subtotal)
+		{
+			if (subtotal >= 20) 
+			{
+				new_subtotal = subtotal * 0.9;
+				return new_subtotal;
+			}
+
+			return subtotal;
+		}
+
+		//add 6.25% meals tax 
+		function add_tax(new_price)
+		{
+			return new_price * 1.0625;
+		}
+
+		//caculate the subtotal price of each food item
+		function food_subtotal()
+		{
+			for(i = 0; i < 3; i++)
+			{
+				food_price[i] = unit_price[i] * foods_num[i];
+				food_price[i] = food_price[i];
+			}
+		}
+
+		//run the program
+		getQuantity();
+		subtotal = subTotal();
+		new_price = discount(subtotal);
+		discount = (subtotal - new_price);
+		after_tax = add_tax(new_price);
+		tax = (after_tax - new_price);
+		food_subtotal();
+	</script>
+</head>
+
+<body>
+	<div id="table">
+		<div class="table_row">
+			<div class="table_cell">Items</div>
+			<div class="table_cell">Quantities</div>
+			<div class="table_cell">Price</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Hotdogs</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(foods_num[0]);
+				</script>
+			</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(food_price[0].toFixed(2));
+				</script>
+			</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">French Fries</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(foods_num[1]);
+				</script>
+			</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(food_price[1].toFixed(2));
+				</script>
+			</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Soda</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(foods_num[2]);
+				</script>
+			</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(food_price[2].toFixed(2));
+				</script>
+			</div>	
+		</div>
+		<div class="table_row">
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>	
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Subtotal:</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(subtotal.toFixed(2));
+				</script>
+			</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Discount:</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write("-" + discount.toFixed(2));
+				</script>
+			</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Tax 6.25%:</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write("+" + tax.toFixed(2));
+				</script>
+			</div>
+		</div>
+		<div class="table_row">
+			<div class="table_cell">Total</div>
+			<div class="table_cell">&nbsp;&nbsp;</div>
+			<div class="table_cell">
+				<script language="javascript">
+					document.write(after_tax.toFixed(2));
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
