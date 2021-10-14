@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lottery Simulartor</title>
+	<style type="text/css">
+		body{
+			background-color: #dfcfbe;
+			font-size: 20px;
+			line-height: 2em;
+		}
+	</style>
+</head>
+<body>
+	<h2>Lucky for Life Result</h2>
+	<script language="javascript">
+		my_lottery_num = [];
+		lottery_num = [];
+
+		function getMyLottery()
+		{
+			for (i = 0; i < 5; i++) {
+				my_lottery_num[i] = Math.floor(Math.random() * 48) + 1;
+			}
+			//sort my lottery numbers
+			my_lottery_num.sort(function(a, b){return a - b});
+			Mylucky_ball = Math.floor(Math.random() * 18) + 1;
+			return Mylucky_ball;
+		}
+
+
+		function get_num()
+		{
+			lottery_num = prompt("Please enter 5 winning numbers, each separted by a space: ", "10 11 17 27 32").split(" ");
+			luck_ball = prompt("Please enter the lucky number: ", "12");
+			return luck_ball;
+		}
+
+		//Display my lottery and lucky ball number
+		function display_Mylottery(Mylucky_ball)
+		{	document.write("The 5 numbers you pick are: ")
+			for (i = 0; i < 5; i++)
+			{
+				document.write(my_lottery_num[i] + "\n");
+			}
+			document.write("<br>" + "Your lucky ball number is: " + Mylucky_ball + "<br>");
+		}
+
+		//Display 5 winning numbers and the lucky ball number
+		function display_lottery(lucky_ball)
+		{
+			document.write("The 5 winning numbers are: ")
+			for (i = 0; i < 5; i++)
+			{
+				document.write(lottery_num[i] + "\n");
+			}
+			document.write("<br>" + "The lucky ball number is: " + luck_ball + "</br>");
+		}
+
+		//Calculate how many numbers are matched
+		function compare_num()
+		{
+			match_num = 0;
+			for (i = 0; i < 5; i++) {
+				for (j = 0; j < 5; j++) {
+					if (my_lottery_num[i] == lottery_num[j]) {
+					match_num++;
+				}
+				}
+			}
+			
+			return match_num;
+		}
+
+		//Check if the lucky ball is matched, indicated by a boolean
+		function compare_luckyBall()
+		{
+			if (Mylucky_ball == lucky_ball) return true;
+			else return false;
+	
+		}
+
+		//Display whether the lucky ball is matched
+		function display_isLuckyBall (luckyBall) {
+			if (luckyBall) {
+				document.write("</br>" + "The lucky ball is matched!" + "</br>");
+			} else {
+				document.write("</br>" + "The lucky ball is not matched!" + "</br>");
+			}
+		}
+
+		//Calculate the payout based on the given table
+		function display_payout(match_num, luckyBall)
+		{
+			if ((match_num == 5) && luckyBall) {
+				document.write("Your payout is $7,000 a WEEK for LIFE");
+			} else if ((match_num == 5) && !luckyBall) {
+				document.write("Your payout is $25,000 a YEAR for LIFE");
+			} else if ((match_num == 4) && luckyBall) {
+				document.write("Your payout is $5,000");
+			} else if ((match_num == 4) && !luckyBall) {
+				document.write("Your payout is $200");
+			} else if ((match_num == 3) && luckyBall) {
+				document.write("Your payout is $150");
+			} else if ((match_num == 3) && !luckyBall) {
+				document.write("Your payout is $20");
+			} else if ((match_num == 2) && luckyBall) {
+				document.write("Your payout is $25");
+			} else if ((match_num == 2) && !luckyBall) {
+				document.write("Your payout is $3");
+			} else if ((match_num == 1) && luckyBall) {
+				document.write("Your payout is $6");
+			} else if ((match_num == 0) && luckyBall) {
+				document.write("Your payout is $4");
+			} else {
+				document.write("Sorry, you do not have a payout.")
+			}
+		}
+
+
+		// run Lottery Simulator
+		//generate my sorted lottery and lucky ball numbers
+		Mylucky_ball = getMyLottery();
+		//get winning numbers and lucky ball number from the user
+		lucky_ball = get_num();
+		//count the number of matched numbers by comparing my numbers to the winning numbers
+		match_num = compare_num();
+		//a boolean indicating if the lucky ball number is matched
+		luckyBall = compare_luckyBall();
+		display_Mylottery(Mylucky_ball);
+		display_lottery(lucky_ball);
+		display_isLuckyBall(luckyBall);
+		display_payout(match_num, luckyBall);
+	</script>
+	</body>
+</html>
