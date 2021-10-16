@@ -19,9 +19,15 @@
 
 		function getMyLottery()
 		{
-			for (i = 0; i < 5; i++) {
-				my_lottery_num[i] = Math.floor(Math.random() * 48) + 1;
+			while (my_lottery_num.length < 5) {
+				candidate = Math.floor(Math.random() * 48) + 1;
+				//make sure every number is unique
+				if (my_lottery_num.includes(candidate) == false) {
+					my_lottery_num.push(candidate);
+				}
+
 			}
+
 			//sort my lottery numbers
 			my_lottery_num.sort(function(a, b){return a - b});
 			Mylucky_ball = Math.floor(Math.random() * 18) + 1;
@@ -129,6 +135,7 @@
 		luckyBall = compare_luckyBall();
 		display_Mylottery(Mylucky_ball);
 		display_lottery(lucky_ball);
+		document.write("Matched number is: " + match_num + "</br>");
 		display_isLuckyBall(luckyBall);
 		display_payout(match_num, luckyBall);
 	</script>
