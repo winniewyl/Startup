@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Amicable Numbers</title>
+	<style type="text/css">
+		body{
+			background-color: #dfcfbe;
+			font-size: 20px;
+			line-height: 2em;
+		}
+	</style>
+</head>
+
+<body>
+	<form>
+		<div class="formbox">
+			<label for="num1">First Number</label>
+			<input type="text" id="userinput_1" name="num1"><br><br>
+		</div>
+		
+		<div class="formbox">
+			<label for="num2">Second Number</label>
+			<input type="text" id="userinput_2" name="num2"><br><br>
+		</div>
+		<div class="formbox">
+			<input type="button" value ="Submit" name="btn1" onclick="run()"><br><br>
+		</div>
+	</form>
+
+	<div id="result"></div>
+		
+<script language="javascript">
+	//the main function is triggered when the user clicks the button
+	function run() {
+		inputs = [];
+	    inputs.push(document.getElementById("userinput_1").value) ;
+	    inputs.push(document.getElementById("userinput_2").value) ;
+	    document.getElementById("result").innerHTML = "true";
+	    
+	    number1_factors = get_factors(inputs[0]);
+	    number2_factors = get_factors(inputs[1]);
+	    sum_1 = add_factors(number1_factors);
+	    sum_2 = add_factors(number2_factors);
+	    result = isAmicable(sum_1, sum_2, inputs);
+	    
+	    display_results(result);
+
+	    alert_display = alert_info(number1_factors, number2_factors);
+	    window.alert(alert_display);
+	    
+	}
+	
+	//display the factors of both numbers for diagnostic purposes
+	function alert_info (number1_factors, number2_factors) {
+		display = "Factors of the first input number: ";
+		for (i = 0; i < number1_factors.length; i++) {
+			display += number1_factors[i] + " ";
+		} 
+
+		display += "\n" + "Factors of the second input number: ";
+		for (j = 0; j < number2_factors.length; j++) {
+			display += number2_factors[j] + " ";
+		} 
+
+		return display;
+	}
+
+	//return an array of factors of a particular number
+	function get_factors (number) {
+		factors_arr = [];
+		for (i = 1; i < number; i++) {
+			if (isAFactor(number, i)) 
+			factors_arr.push(i); 
+		}  
+
+		return factors_arr;
+	}
+
+	//check if one number is a factor of the other number
+	function isAFactor (dividend, divisor) {
+		if ((dividend % divisor) == 0) return true;
+		else return false;
+	}
+
+	//sum all the factors of a particular number
+	function add_factors (array) {
+		sum = 0;
+		for (i = 0; i < array.length; i++) {
+			sum += array[i];
+		}
+
+		return sum;
+	}
+
+	//check if two numbers are amicable
+	function isAmicable (sum_1, sum_2, inputs) {
+		if ((sum_1 == inputs[1]) && (sum_2 == inputs[0])) return true;
+		else return false;
+	}
+	
+	//display the results
+	function display_results(result) {
+	 	if (result == true) {
+	    	document.getElementById("result").innerHTML = "The numbers: " + inputs[0] + " and " + inputs[1] + " are amicable.";
+		} else {
+			document.getElementById("result").innerHTML = "The numbers: " + inputs[0] + " and " + inputs[1] +  " are not amicable."
+		} 
+	}
+
+
+</script>
+
+</body>
+</html>
