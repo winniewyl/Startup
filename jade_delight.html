@@ -183,13 +183,10 @@ $(document).ready(function(){
 function calculate_time(p_or_d) {
 		var d = new Date();
 		var v = new Date();
-		//alert("current date is: " + d + "\n");
-
+		
 		if (p_or_d == "pickup") {
 			v.setMinutes(d.getMinutes()+ 15);
-			return "The expected <strong>pickup</strong> time is 15 minutes from now: " + v;
-
-		
+			return "The expected <strong>pickup</strong> time is 15 minutes from now: " + v;	
 		} else {
 			v.setMinutes(d.getMinutes()+ 30);
 			return "The expected <strong>delivery</strong> time is 30 minutes from now: " + v; 
@@ -204,27 +201,28 @@ function display_result() {
 	//calculate pickup/delivery time
 	p_or_d = $('input[name=p_or_d]:checked', '#form1').val();
 	expected_time = calculate_time(p_or_d);
-	windowobj.document.write(expected_time + "<br><br>");
+	windowobj.document.write(expected_time + "<br>");
 
-	food_items = [];
-	food_items[0] = menuItems[0].name + "&nbsp";
-	food_items[1] = menuItems[1].name;
-	food_items[2] = menuItems[2].name + "&nbsp &nbsp &nbsp ";
-	food_items[3] = menuItems[3].name + "&nbsp &nbsp &nbsp &nbsp";
-	food_items[4] = menuItems[4].name + "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp ";
-
-	space = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ";
-	order_display = "Item Name" + space + "Quantity" + space + "Cost Each" + space + "Total Cost" + "<br>";
-	
-	
+	sum = 0;
 	for (i = 0; i < menuItems.length; i++) {
-	 	if (quantity[i] != 0) {
-
-	 		order_display += food_items[i] + space + quantity[i] + space + menuItems[i].cost + space + "$" + document.forms[0].cost[i].value + "<br>";
-	 	}
+		current = parseInt(quantity[i]);
+		sum += current;
 	}
-	windowobj.document.write(order_display);
-	windowobj.document.write("<br>The total amount is $" + document.forms[0].total.value + "<br>");
+
+	var s = "<table><tr><th>Item Name</th><th>Item Quantity</th><th>Cost Each</th><th>Total Cost</th></tr>";
+  for (i=0; i< menuItems.length; i++) {
+  	if (quantity[i] != 0) {
+  		s += "<tr><td>" + menuItems[i].name + "</td>";
+	  s += "<td>" + quantity[i] + "</td>";
+	  s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+	  s += "<td>$ " + document.forms[0].cost[i].value + "</td></tr><br>";
+  	}
+  }
+  s += "</table>"
+  windowobj.document.writeln(s);
+  windowobj.document.write("<br>The total amount of items is: " + sum);
+	
+	windowobj.document.write("<br>Total Cost: $" + document.forms[0].total.value + "<br>");
 
 }
 
