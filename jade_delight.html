@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jade Delight</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<script language="javascript">
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost = cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 4.5),
+	new MenuItem("Sweet and Sour Pork", 6.25),
+	new MenuItem("Shrimp Lo Mein", 5.25),
+	new MenuItem("Moo Shi Chicken", 6.5),
+	new MenuItem("Fried Rice", 2.35)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+
+
+
+
+//validation on submit
+function validate() {
+	alert("validating");
+
+	result1 = validate_phoneANDname();
+	
+	result2 = validate_streetANDcity();
+	
+	result3 = validate_order_num();
+	
+	if ((result1 == true) && (result2 == true) && (result3 == true) ) {
+		display_result();
+	}
+		
+		return false;
+}
+
+function validate_phoneANDname () {
+	result = true;
+	//get the phone number from the user
+	phone_num = document.getElementById("phone1").value;
+	valid_num = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+		with(document.form) {
+			//verify the last name is entered
+		 	if (lname.value == "") {
+		 		result = false;
+		 		alert("Please enter your last name");
+		 		lname.focus();
+		 	}
+
+		 	//verify a valid phone number is entered
+		 	if (!phone_num.match(valid_num)) {
+		 		result = false;
+		 		alert("Please enter a valid phone number");
+		 		phone.focus();
+		 		phone.select();
+		 	}
+		}
+		return result;
+}
+
+
+function validate_streetANDcity() {
+	result = true;
+	//if the order is delivery, street and city are required
+	p_or_d = $('input[name=p_or_d]:checked', '#form1').val();
+	if (p_or_d == "delivery") {
+		with(document.form) {
+			if (document.form.street.value == "") {
+				result = false;
+				alert("Please enter your street");
+				street.focus();
+			}
+
+			if (document.form.city.value == "") {
+				result = false;
+				alert("Please enter your city");
+				city.focus();
+			}
+		}	
+	}
+	return result;
+}
+
+function validate_order_num() {
+	result = true;
+	//check at least one item is ordered
+	at_least_one = false;
+	for (i = 0; i < menuItems.length; i++) {
+		if (quantity[i] != 0) {
+			at_least_one = true;
+		}
+	}
+
+	if (at_least_one == false) {
+		result = false;
+		alert("Please select at least one item");
+	}
+	return result;
+}
+
+
+//create an array to store the quantity of each food items
+quantity = [0, 0, 0, 0, 0];
+
+$(document).ready(function(){
+	$("#p_street").hide();
+	$("#p_city").hide();
+
+	$("#pickup").change(function() {
+	 	$("#p_street").toggle();
+	 	$("#p_city").toggle();
+	});
+
+	$("#delivery").change(function() {
+	 	$("#p_street").toggle();
+	 	$("#p_city").toggle();
+	});
+
+	$("tr td select").change(function() {
+		//rowIndex indicates the quantity of which item is changed
+		rowIndex = this.name.substring(4);
+		//get the selected quantity
+		quan = this.selectedIndex;
+		price = (menuItems[rowIndex].cost) * quan;
+		//update the corresponding total cost
+		document.forms[0].cost[rowIndex].value = price.toFixed(2);
+		updateQuantity(rowIndex);
+		updateTotal();
+	})
+		
+		function updateQuantity(rowIndex) {
+			if (rowIndex == 0) {
+				quantity[0] = document.forms[0].quan0.value;
+			} else if (rowIndex == 1) {
+				quantity[1] = document.forms[0].quan1.value;
+			} else if (rowIndex == 2) {
+				quantity[2] = document.forms[0].quan2.value;
+			} else if (rowIndex == 3) {
+				quantity[3] = document.forms[0].quan3.value;
+			} else if (rowIndex == 4) {
+				quantity[4] = document.forms[0].quan4.value;
+			}
+		}
+
+		function updateTotal() {
+			//update subtotal
+			subtotal = 0;
+			for (i = 0; i < menuItems.length; i++) {
+			 	cost = menuItems[i].cost;
+			 	subtotal += quantity[i] * cost;
+			}
+			document.forms[0].subtotal.value = subtotal.toFixed(2);
+
+			//update 6.25% Mass tax 
+			tax = subtotal * 0.0625;
+			document.forms[0].tax.value = tax.toFixed(2);
+			//update the total
+			document.forms[0].total.value = (subtotal + tax).toFixed(2);
+		}
+})
+
+function calculate_time(p_or_d) {
+		var d = new Date();
+		var v = new Date();
+		//alert("current date is: " + d + "\n");
+
+		if (p_or_d == "pickup") {
+			v.setMinutes(d.getMinutes()+ 15);
+			return "The expected <strong>pickup</strong> time is 15 minutes from now: " + v;
+
+		
+		} else {
+			v.setMinutes(d.getMinutes()+ 30);
+			return "The expected <strong>delivery</strong> time is 30 minutes from now: " + v; 
+		}
+		
+}
+
+
+function display_result() {
+	windowobj = window.open();
+	windowobj.document.write("Thanks for ordering!" + "<br><br>");
+	//calculate pickup/delivery time
+	p_or_d = $('input[name=p_or_d]:checked', '#form1').val();
+	expected_time = calculate_time(p_or_d);
+	windowobj.document.write(expected_time + "<br><br>");
+
+	food_items = [];
+	food_items[0] = menuItems[0].name + "&nbsp";
+	food_items[1] = menuItems[1].name;
+	food_items[2] = menuItems[2].name + "&nbsp &nbsp &nbsp ";
+	food_items[3] = menuItems[3].name + "&nbsp &nbsp &nbsp &nbsp";
+	food_items[4] = menuItems[4].name + "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp ";
+
+	space = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ";
+	order_display = "Item Name" + space + "Quantity" + space + "Cost Each" + space + "Total Cost" + "<br>";
+	
+	
+	for (i = 0; i < menuItems.length; i++) {
+	 	if (quantity[i] != 0) {
+
+	 		order_display += food_items[i] + space + quantity[i] + space + menuItems[i].cost + space + "$" + document.forms[0].cost[i].value + "<br>";
+	 	}
+	}
+	windowobj.document.write(order_display);
+	windowobj.document.write("<br>The total amount is $" + document.forms[0].total.value + "<br>");
+
+}
+
+</script>
+
+<h1>Jade Delight</h1>
+<form name="form" id="form1" onsubmit="return validate()">
+<p>First Name: <input type="text"  name='fname' /></p>
+<p>Last Name*:  <input type="text"  name='lname' /></p>
+<p id="p_street">Street: <input type="text" id='street1' name='street' /></p>
+<p id="p_city">City: <input type="text" id="city1" name='city' /></p>
+<p>Phone*: <input type="text" id="phone1" name='phone' /></p>
+<p> 
+	<input type="radio"  id="pickup" name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio" id="delivery" name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+
+<table name ="table" id="table1" border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+
+<script language="javascript">
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr><td>";
+	  s += makeSelect("quan" + i, 0, 10);
+	  s += "</td><td>" + menuItems[i].name + "</td>";
+	  s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+	  s += "<td>$<input type='text' name='cost'/></td></tr>";
+  }
+  document.writeln(s);
+
+</script>
+</table>
+
+<p>Subtotal: 
+   $<input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p>Mass tax 6.25%:
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p>Total: $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "submit" value = "Submit Order" />
+</form>
+
+
+</body>
+</html>
