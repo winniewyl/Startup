@@ -1,7 +1,7 @@
 [ {  
 	"title" : "All You Need Is Love",
 	"artist" : "The Beatles",
-	"genre" : "Classic Rock",
+	"genre" : ["Classic Rock"],
 	"year" : "1967"
 }, {
 	"title" : "Change the World",
