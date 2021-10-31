@@ -1,0 +1,105 @@
+[ {  
+	"title" : "All You Need Is Love",
+	"artist" : "The Beatles",
+	"genre" : "Classic Rock",
+	"year" : "1967"
+}, {
+	"title" : "Change the World",
+	"artist" : "Eric Clapton",
+	"genre" : ["Classic Rock"],
+	"year" : "1996"
+}, { 
+	"title" : "Have I Told You Lately",
+	"artist" : "Van Morrison",
+	"genre" : ["Classic Rock"],
+	"year" : "1989"
+}, {
+	"title" : "Pretty Woman",
+	"artist" : "Roy Orbison",
+	"genre" : ["Classic Rock"],
+	"year" : "1964"
+}, {
+	"title" : "Die a Happy Man",
+	"artist" : "Thomas Rhett",
+	"genre" : ["Country"],
+	"year" : "2015"
+}, { 
+	"title" : "Friends In Low Places",
+	"artist" : "Garth Brooks",
+	"genre" : ["Country"],
+	"year" : "1990"
+}, {
+	"title" : "My Little Girl",
+	"artist" : "Tim McGraw",
+	"genre" : ["Country"],
+	"year" : "2006"
+}, {
+	"title" : "Wagon Wheel",
+	"artist" : "Darius Rucker",
+	"genre" : ["Country"],
+	"year" : "2013"
+}, {
+	"title" : "Brick House",
+	"artist" : "The Commodores",
+	"genre" : ["Funk"],
+	"year" : "1977"
+}, {
+	"title" : "I Feel Good",
+	"artist" : "James Brown",
+	"genre" : ["Funk"],
+	"year" : "1964"
+}, {
+	"title" : "Play That Funky Music",
+	"artist" : "Wild Cherry",
+	"genre" : ["Funk"],
+	"year" : "1976"
+}, {
+	"title" : "So Fresh, So Clean",
+	"artist" : "Tim McGraw",
+	"genre" : ["Country"],
+	"year" : "2006"
+}, {
+	"title" : "At Last",
+	"artist" : "Etta James",
+	"genre" : ["Jazz", "Swing"],
+	"year" : "2012"
+}, {
+	"title" : "Beyond the Sea",
+	"artist" : "Bobby Darin",
+	"genre" : ["Jazz", "Swing"],
+	"year" : "1958"
+}, {
+		"title" : "Chameleon",
+	"artist" : "Herbie Hancock",
+	"genre" : ["Jazz", "Swing"],
+	"year" : "1973"
+}, {
+	"title" : "Come Fly With Me",
+	"artist" : "Frank Sinatra",
+	"genre" : ["Jazz", "Swing"],
+	"year" : "1958"
+}, {
+	"title" : "Blurred Lines",
+	"artist" : "Robin Thicke",
+	"genre" : ["New Pop", "Contemporary"],
+	"year" : "2013"
+
+}, {
+	"title" : "Butterfly Kisses",
+	"artist" : "Bob Carlisle",
+	"genre" : ["New Pop", "Contemporary"],
+	"year" : "1995"
+
+}, {
+	"title" : "Crazy",
+	"artist" : "Gnarls Barkley",
+	"genre" : ["New Pop", "Contemporary"],
+	"year" : "2006"
+
+}, {
+	"title" : "Everything",
+	"artist" : "Michael Buble",
+	"genre" : ["New Pop", "Contemporary"],
+	"year" : "2007"
+} ]
+ 
