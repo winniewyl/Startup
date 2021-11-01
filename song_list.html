@@ -42,7 +42,7 @@
 		}
 
 		#data3{
-			padding-left: 5rem;
+			padding-left: 35rem;
 			font-size: 30px;
 			font-display: center;
 		}
@@ -127,12 +127,12 @@
 				}
 			})
 
-			filtered_result = "Filtered result： " + "<br>" + "<ul>";
+			filtered_result = "";
 			for (i = 0; i < song_list.length; i++) {
-				filtered_result += "<li>" + song_list[i] + "</li>";
+				filtered_result += "<br>" + song_list[i] + "<br>";
 			}
 
-			filtered_result += "</ul>";
+			
 			document.getElementById("data3").innerHTML = filtered_result;
 
 		}
