@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Song List</title>
+	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<style type="text/css">
+		body{
+			background-color: #dfcfbe;
+			
+		}
+
+		input[type="button"] {
+			border: 2px solid black;
+  			margin: 3rem 38rem ;
+  			background: #d2691e;
+  			width: 150px;/*150px;*/
+  			padding: 1rem 0rem;
+  			border-radius: 20px;
+  			font-size: 20px;
+  			font-weight: bold;
+  			color: #fff;
+		}
+
+		select {
+			font-size: 18px;
+			border: 2px solid black;
+			margin: 0 50px;
+  			padding: 10px 5px;
+  			outline: none;
+  			border-radius: 5px;
+  			width: 93%;
+		}
+
+		#data1 {
+			font-size: 18px;
+		}
+
+		#data2 {
+			font-size: 30px;
+			padding-left: 30rem;
+		}
+
+		#data3{
+			padding-left: 5rem;
+			font-size: 30px;
+			font-display: center;
+		}
+
+		ul {
+  			list-style-type: none;
+		}
+	</style>
+
+
+	<script type="text/javascript">
+
+		function loadFile() {
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+
+			request.open("GET", "https://winniewyl.github.io/Startup/song_list.json", true);
+			console.log("2 - opened request file");
+
+			request.onreadystatechange = function() {
+				console.log("3 - onreadystatechange event fired");
+
+				if (request.readyState == 4 && request.status == 200) {
+					result = request.responseText;
+					data = JSON.parse(result);
+
+					document.getElementById("data1").innerHTML = result; 
+
+					strHTML = "<ul>";
+					data.forEach(function(song) {
+					genre = "";
+					for (let i in song.genre) {
+  								genre += song.genre[i] + ", ";
+								}
+					strHTML += "<li>" 
+							+ "<p style='font-weight: bold'>" + song.title + "</p>"
+							+ "Artist: " + song.artist + "<br>"
+							+ "Genre: " + genre + "<br>"
+							+ "Released " + song.year + "</li><br>";
+				})
+				strHTML += "</ul>";
+
+				document.getElementById("data2").innerHTML =strHTML; 
+
+
+				}
+
+				else if (request.readyState == 4 && request.status != 200) {
+
+				document.getElementById("data2").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+				}
+
+				else if (request.readyState == 3) {
+
+					document.getElementById("data2").innerHTML = "Too soon!  Try again";
+
+				}
+
+
+			}
+
+			request.send();
+			console.log("4 - Request sent");
+
+
+		}
+
+		function filter() {
+			genre = ["Classic Rock", "Country", "Funk", "Jazz", "Swing", "New Pop", "Contemporary"];
+			genre_index = document.getElementById("genre").value;
+			genre_name = genre[genre_index];
+
+
+			song_list = [];
+			data.forEach(function(song) {
+				for (i = 0; i < song.genre.length; i++) {
+					if (genre_name == song.genre[i]) {
+						song_list.push(song.title);
+					}
+
+				}
+			})
+
+			filtered_result = "Filtered result： " + "<br>" + "<ul>";
+			for (i = 0; i < song_list.length; i++) {
+				filtered_result += "<li>" + song_list[i] + "</li>";
+			}
+
+			filtered_result += "</ul>";
+			document.getElementById("data3").innerHTML = filtered_result;
+
+		}
+
+		
+	</script>
+</head>
+<body onload="loadFile()">
+	
+	<h1>Song List</h1>
+	<div id="data1"></div>
+	<div id="data2"></div>
+	
+	<form>
+	<select name='sel1' size = '1' id="genre">
+		<option value='0'>Classic Rock</option>
+		<option value='1'>Country</option>
+		<option value='2'>Funk</option>
+		<option value='3'>Jazz</option>
+		<option value='4'>Swing</option>
+		<option value='5'>New Pop</option>
+		<option value='6'>Contemporary</option>
+	</select><br>
+	<input type ="button" name="btn1" value ="Filter" onclick="filter()">
+	</form>
+
+	<div id="data3"></div>
+	
+</body>
+</html>
