@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<title>University API</title>
+	<meta charset="utf-8"/>
+
+	<style type="text/css">
+		body{
+			background-color: #dfcfbe;
+			font-size: 20px;
+		}
+		
+	</style>
+	<script>
+		
+		function getUniversity() {
+			/* Step 1: Make instance of request object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			// Step 2: Set the URL for the AJAX request to be the JSON file
+ 
+		    request.open("GET", "http://universities.hipolabs.com/search?country=Canada", true)
+
+			console.log("2 - opened request file");
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() {
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) {
+					// Step 5: wait for done + success
+					console.log("5 - response received");
+					result = request.responseText;
+					//alert(result);
+					universities = JSON.parse(result);
+					
+					strHTML = "<ul>";
+					universities.forEach(function(school) {
+						strHTML += "<li>" + school.name + "</li>";
+					});
+					strHTML += "</ul>";
+					document.getElementById("data").innerHTML = strHTML;
+					
+				}
+				else if (request.readyState == 4 && request.status != 200) {
+
+					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+				}
+
+				else if (request.readyState == 3) {
+
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+
+				}
+
+			}
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 - Request sent");
+		}
+	</script>
+</head>
+
+
+<body onload="getUniversity()">
+
+	<h1>Universities</h1>
+	<div id="data">Loading...</div>
+</body>
+</html>
+
+
