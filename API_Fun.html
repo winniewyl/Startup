@@ -67,9 +67,33 @@
 
 
 <body onload="getUniversity()">
+	<div>
+		<h1>Description</h1>
+		<ul>
+		<li>The API I selected is a public API which returns a list of universities. The JSON object literlas contain key/value pairs
+		   such as the name, the website, and the country where the school locates. 
+		</li><br/>
+		<li>I found this API at <a href="https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/" target="_blank">
+			https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/</a>
+		</li><br/>
+		<li>The options I used include making an XMLHttpRequest of object after the page is loaded and extract universities located in Canada
+			by adding a parameter in the URL.
+		</li><br/>
+		<li>Applications: 
+			<ul>
+				<li>A study abroad program can build their website using this public API so students would be able to search for colleges 
+					sorted by different countries.</li>
+				<li>
+					The Ministry of Education would be able to track the change of the number of universities in different states/provinces of foreign countires. 
+				</li>
+			</ul>
+		</li>
+		</ul>
+	</div>
 
-	<h1>Universities</h1>
+	<h1>Universities in Canada</h1>
 	<div id="data">Loading...</div>
+	
 </body>
 </html>
 
