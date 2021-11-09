@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+	<title>University API</title>
+	<meta charset="utf-8"/>
+
+	<style type="text/css">
+		body{
+			background-color: #dfcfbe;
+			font-size: 20px;
+		}
+		
+	</style>
+	<script>
+		
+		function getUniversity() {
+			/* Step 1: Make instance of request object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			// Step 2: Set the URL for the AJAX request to be the JSON file
+ 
+		    request.open("GET", "https://universities.hipolabs.com/search?country=Canada", true)
+			//https://api.punkapi.com/v2/beers
+			//https://universities.hipolabs.com/search?country=Canada
+			console.log("2 - opened request file");
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() {
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) {
+					// Step 5: wait for done + success
+					console.log("5 - response received");
+					result = request.responseText;
+					//alert(result);
+					universities = JSON.parse(result);
+					
+					strHTML = "<ul>";
+					universities.forEach(function(school) {
+						strHTML += "<li>" + school.name + "</li>";
+					});
+					strHTML += "</ul>";
+					document.getElementById("data").innerHTML = strHTML;
+					
+				}
+				else if (request.readyState == 4 && request.status != 200) {
+
+					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+				}
+
+				else if (request.readyState == 3) {
+
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+
+				}
+
+			}
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 - Request sent");
+		}
+	</script>
+</head>
+
+
+<body onload="getUniversity()">
+	<div>
+		<h1>Description</h1>
+		<ul>
+		<li>The API I selected is a public API which returns a list of universities. The JSON object literlas contain key/value pairs
+		   such as the name, the website, and the country where the school locates. 
+		</li><br/>
+		<li>I found this API at <a href="https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/" target="_blank">
+			https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/</a>
+		</li><br/>
+		<li>The options I used include making an XMLHttpRequest of object after the page is loaded and extract universities located in Canada
+			by adding a parameter in the URL.
+		</li><br/>
+		<li>Applications: 
+			<ul>
+				<li>A study abroad program can build their website using this public API so students would be able to search for colleges 
+					sorted by different countries.</li>
+				<li>
+					The Ministry of Education would be able to track the change of the number of universities in different states/provinces of foreign countires. 
+				</li>
+			</ul>
+		</li>
+		</ul>
+	</div>
+
+	<h1>Universities in Canada</h1>
+	<div id="data">Loading...</div>
+	
+</body>
+</html>
+
