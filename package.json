@@ -2,9 +2,9 @@
   "name": "hello_app",
   "version": "1.0.0",
   "description": "my hello_app node app",
-  "main": "hello_app.js",
+  "main": "StockTicker.js",
   "scripts": {
-  "start": "node hello_app.js"
+  "start": "node StockTicker.js"
 },
   "repository": {
   "type": "git",
